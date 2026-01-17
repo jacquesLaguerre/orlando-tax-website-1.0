@@ -1,0 +1,144 @@
+/* Responsive CSS Document */
+
+/* 
+    Project:        pinaz -  Business & Agency Template.
+    Version:        1.0
+    Last change:    01/06/2018.
+    Designed:       Template_mr
+    Developed:      Template_mr
+   
+*/
+
+@media (min-width: 992px) {
+  .container {padding-left: 0 !important;padding-right: 0 !important;}
+}
+@media (max-width: 1199px) {
+  .shop-details .single-product-details .product-order-details {width:100%;padding: 40px 0 0 0;}
+  .consultation-help .text-wrapper .overlay {padding-left: 0;}
+  .consultation-help .text-wrapper h3 br {display: none;}
+  .bottom-banner h3 {margin-top: 0;}
+}
+/*(max-width: 1199px)*/
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .consultation-help .section-part .col {max-width: 485px;}
+  .shop-details .review-tab .nav-tabs > li > a {padding: 0 30px;}
+  #mega-menu-wrapper .nav>li {margin: 0 12px;}
+  .top-feature .single-feature,.our-service .single-service .text {padding-left: 15px;padding-right: 15px;}
+  .our-service .single-service .text h4 {font-size: 20px;}
+  .theme-counter .single-box h4 {font-size: 16px;margin-bottom: 20px;}
+  .consultation-help.style-two .consultation-form-wrapper {padding-left: 60px;}
+  .details-page-content .short-access .left-box {padding-left: 15px;padding-right: 15px;}
+  .contact-page-title p {width: 75%;}
+}
+
+/*(min-width: 992px) and (max-width: 1199px)*/
+
+@media (max-width: 991px) {
+  .menu-wrapper #mega-menu-wrapper {width: 100%;position: absolute;right: 0;top:0;z-index: 1;padding: 0 15px;}
+  .menu-wrapper .container {position: relative;}
+  .menu-wrapper .logo {position: relative;z-index: 9;}
+  .theme-header-wrapper .menu-wrapper {padding-top: 20px;}
+  .menu-wrapper.fixed {padding: 10px 0;}
+  .section-margin-bottom,.consultation-help.style-one {margin-bottom: 70px;}
+  .theme-sidebar,.shop-sidebar,.section-margin-top,.theme-counter {margin-top: 70px;}
+  .client-section .our-partner h3 {margin: 40px 0 20px 0;}
+  .consultation-help .consultation-form-wrapper {padding: 0;}
+  .consultation-help .section-part .col {float: none;margin: 0 auto;}
+  .theme-footer .top-footer [class*="col-"] {margin-bottom: 40px;}
+  .theme-footer .bottom-footer {margin-top: 5px;}
+  #mega-menu-wrapper .nav li.quote a {margin: 0 15px 10px 15px;text-align: center;}
+  #mega-menu-wrapper .nav>li>a:before,.about-company .main-content-wrapper:before {display: none;}
+  .about-company {padding-top: 50px;}
+  .consultation-help.style-one .consultation-form-wrapper {-webkit-transform:none;transform:none;margin-top: 20px;}
+  .consultation-help .section-part {width: 100%;}
+  .consultation-help.style-two .consultation-form-wrapper {padding-left: 0;}
+  .consultation-help.style-two .consultation-form-wrapper form {margin-bottom: 40px;}
+  .feature-banner {text-align: center;}
+  .feature-banner .theme-button-one {float: none;}
+  .contact-page .map-canvas {margin-top: 40px;}
+  .contact-page-title p {width: 100%;}
+} 
+/*(max-width: 991px)*/
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .consultation-help .section-part .col {max-width: 720px;}
+  .shop-details .review-tab .nav-tabs > li > a {padding: 0 40px;}
+  .our-service .single-service .text {padding-left: 20px;padding-right: 20px;}
+  .theme-inner-banner .opacity {padding-top: 180px;}
+  .theme-inner-banner h2 {padding-bottom: 75px;}
+  #theme-main-banner h1 {font-size: 50px;line-height: 60px;margin: 15px 0 45px 0;}
+  #theme-main-banner {height: 750px !important;}
+  #theme-main-banner .container {margin-top: 50px;}
+}
+
+/*(min-width: 768px) and (max-width: 991px)*/
+@media (max-width: 767px) {
+  .consultation-help .section-part .col {max-width: none;padding: 0 15px;}
+  .bottom-banner .theme-button-one {float: none;margin-top: 30px;}
+  .bottom-banner {padding: 30px 0;}
+  .theme-footer h5 {margin-bottom: 20px;}
+  .shop-details .single-product-details img {width: 100%;}
+  .shop-details .review-tab .nav-tabs > li {width: 100%;margin-bottom: 5px;}
+  .blog-details .blog-post-data .single-blog .text {padding: 30px 0 20px 0;}
+  .theme-header-wrapper .top-header ul li.social-icon,.theme-title p br{display: none;}
+  .theme-header-wrapper .top-header .search-option {margin-left: 0;}
+  .top-feature .single-feature,.about-company .main-content-wrapper,
+  .our-service .single-service .text,.consultation-help.style-one .consultation-form-wrapper {padding-left: 15px;padding-right: 15px;}
+  .our-service .single-service .text h4,.our-project .single-project .text h4 {font-size: 20px;}
+  .our-service .owl-theme .owl-nav {top:-45px;}
+  .consultation-help .text-wrapper .overlay {padding: 60px 0;}
+  .consultation-help .text-wrapper h3 {margin-top: 30px;}
+  .consultation-help .text-wrapper .theme-button-one {margin-top: 35px;}
+  .our-success-value .theme-counter p {padding-right: 0;}
+  .theme-counter .single-box h4 {font-size: 15px;margin-bottom: 15px;}
+  .theme-counter .single-box .number {font-size: 24px;}
+  .theme-footer .footer-logo p {margin: 25px 0 35px 0;}
+  .theme-header-wrapper .top-header.transparent-bg .wrapper .left-content {width: 100%;text-align: center;}
+  .theme-inner-banner .opacity {padding: 170px 0 15px 0;}
+  .theme-inner-banner h2 {padding-bottom: 35px;font-size: 35px;}
+  .details-page-content .short-access .left-box {padding-left: 15px;padding-right: 15px;margin-bottom: 40px;}
+  .error-page {padding-bottom: 100px;}
+  .theme-header-wrapper .top-header.transparent-bg p {padding: 10px 0;}
+  .theme-form-style-one {padding-left: 15px;padding-right: 15px;}
+  .contact-page {padding: 80px 0;}
+  #theme-main-banner h1 br {display: none;}
+  #theme-main-banner h1 {font-size: 34px;line-height: 42px;margin: 10px 0 25px 0;}
+  #theme-main-banner {height: 550px !important;}
+  #theme-main-banner .container {margin-top: 60px;}
+  #theme-main-banner h3 {font-size: 20px;margin-bottom: 35px;}
+}
+/*(max-width: 767px)*/
+
+@media (max-width: 650px) {
+  #success, #error {
+    width: 86%;
+    height: auto;
+    top: calc(50% - 50px);
+    left: 7%;
+    padding: 30px 10px;
+  }
+  
+}
+
+@media (max-width: 550px) {
+  .shop-page .shop-product .col-xs-6 {width: 100%;}
+}
+
+@media (max-width: 450px) {
+  #theme-main-banner.camera_wrap .camera_pag .camera_pag_ul {display: none;}
+  .client-slider-content .wrapper {padding-right: 25px;}
+  .blog-details .share-option .social-icon {position: relative;-webkit-transform:none;transform:none;left:auto;top:auto;text-align: center;margin-top: 25px;}
+  .project-details .details-page-content .short-access .left-box {padding-left: 15px;padding-right: 15px;}
+}
+@media (max-width: 400px) {
+  .page-changer li {float: none;text-align: center;}
+  .our-team .col-xs-6,.theme-counter .col-xs-4 {width: 100%;}
+  .shop-details .single-product-details .product-order-details .clearfix a,
+  .shop-details .single-product-details .product-order-details .clearfix ul {float: none;}
+  .shop-details .single-product-details .product-order-details .clearfix a {margin-top: 15px;}
+  .blog-details .blog-post-data .author-data img {float: none;margin: 0 auto;}
+  .blog-details .blog-post-data .author-data .text {float: none;width: 100%;padding: 20px 0 0 0;}
+  .theme-header-wrapper .top-header.white-bg .left-content li a {margin-right: 5px;}
+  .theme-header-wrapper .top-header button.search {width: 60px;}
+}
