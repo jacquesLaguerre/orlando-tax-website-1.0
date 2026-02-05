@@ -1994,3 +1994,81 @@ body .theme-button-one {
   padding-left: 12px;
 }
 
+/* Card look */
+.card-feature{
+  background:#fff;
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:16px;
+  padding:24px;
+  height:100%;
+  box-shadow:0 6px 18px rgba(0,0,0,.06);
+}
+
+/* Icon/image area like a card thumbnail */
+.card-feature .icon{
+  width:120px;
+  height:80px;
+  border-radius:12px;
+  overflow:hidden;
+  margin-bottom:18px;
+  background:#f5f6f7;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.card-feature .icon img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* Typography spacing */
+.card-feature h4{
+  margin:0 0 10px 0;
+  font-size:22px;
+  line-height:1.2;
+}
+
+.card-feature p{
+  margin:0;
+  font-size:16px;
+  line-height:1.6;
+  opacity:.85;
+}
+
+/* Give some space between columns/rows */
+.top-feature-grid > [class*="col-"]{
+  margin-bottom:22px;
+}
+
+/* Center the icon container */
+.card-feature .icon {
+  margin: 0 auto 18px auto;   /* centers horizontally */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Center the image inside */
+.card-feature .icon img {
+  display: block;
+  margin: 0 auto;
+}
+.card-feature {
+  padding: 32px;          /* was ~24px */
+  min-height: 380px;      /* gives icons + text more space */
+}
+
+.card-feature .icon {
+  margin-bottom: 22px;    /* more space under icon */
+}
+
+.card-feature .icon img {
+  max-width: 84px;
+  max-height: 84px;
+  width: auto;
+  height: auto;
+}
+
+
