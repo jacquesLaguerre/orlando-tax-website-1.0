@@ -2071,5 +2071,92 @@ body .theme-button-one {
   height: auto;
 }
 
+/* ===============================
+   Cash Advance Promo Section
+================================ */
+
+.cash-advance-section {
+    background: #16b10e;
+  padding: 90px 0;
+}
+
+.cash-title {
+  font-size: 64px;
+  font-weight: 800;
+  color: #000;
+  line-height: 1.1;
+  margin-bottom: 15px;
+}
+
+.cash-title span {
+  color: #e9bb05; /* red highlight like example */
+}
+
+.cash-subtitle {
+  font-size: 22px;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 20px;
+}
+
+.cash-text {
+  font-size: 18px;
+  color: #111;
+  max-width: 520px;
+  margin-bottom: 30px;
+}
+
+.cash-actions .cash-btn {
+  background: #000;
+  color: #fff;
+  padding: 16px 36px;
+  font-size: 18px;
+  border-radius: 8px;
+}
+
+.cash-actions .cash-btn:hover {
+  background: #222;
+}
+
+/* Right image circle */
+.cash-image-circle {
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: #fff;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 15px 35px rgba(0,0,0,.25);
+}
+
+.cash-image-circle img {
+  max-width: 85%;
+  height: auto;
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+  .cash-advance-section {
+    padding: 60px 0;
+    text-align: center;
+  }
+
+  .cash-title {
+    font-size: 42px;
+  }
+
+  .cash-text {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cash-image-circle {
+    width: 260px;
+    height: 260px;
+    margin-top: 40px;
+  }
+}
 
 
