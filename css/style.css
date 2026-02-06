@@ -2411,3 +2411,34 @@ body .theme-button-one {
     max-width: 100%;
   }
 }
+
+/* FAQ icon container */
+.home-faq-icon{
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 18px;
+  color: #16b10e; /* Secure Tax green */
+  border: 2px solid #16b10e;
+  transition: all 0.25s ease;
+}
+
+/* PLUS when collapsed */
+.home-faq-q.collapsed .home-faq-icon::before{
+  content: "+";
+}
+
+/* MINUS when open */
+.home-faq-q:not(.collapsed) .home-faq-icon::before{
+  content: "−"; /* real minus sign */
+}
+
+/* When open, keep green but invert slightly */
+.home-faq-q:not(.collapsed) .home-faq-icon{
+  background: #16b10e;
+  color: #fff;
+}
