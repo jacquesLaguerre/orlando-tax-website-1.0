@@ -2309,9 +2309,9 @@ body .theme-button-one {
 ========================= */
 
 .home-faq{
-  padding: 90px 0;
-  background: #ffffff;
+  padding: 35px 0 90px; /* less space on top */
 }
+
 
 .home-faq-head{
   text-align: center;
