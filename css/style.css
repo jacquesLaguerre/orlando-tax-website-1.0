@@ -2261,3 +2261,44 @@ body .theme-button-one {
 
 
 
+
+/* Section background */
+.doc-location-section {
+  background: #ebdb23; /* goldish */
+  padding: 80px 0;
+}
+
+/* Center the title */
+.doc-location-title {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 800;
+  margin-bottom: 40px;
+  color: #000;
+}
+
+/* Keep cards readable on gold */
+.doc-location-card {
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,.15);
+}
+
+/* Grid stays responsive */
+.doc-location-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+}
+
+/* Mobile */
+@media (max-width: 991px) {
+  .doc-location-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .doc-location-title {
+    font-size: 28px;
+  }
+}
