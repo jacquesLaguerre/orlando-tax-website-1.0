@@ -743,5 +743,51 @@
 		<script src="js/theme.js"></script>
 
 		</div> <!-- /.main-page-wrapper -->
+		<!-- =========================
+     Hannah Chatbot (SecureTax)
+========================= -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" />
+
+<button id="hannah-toggler" aria-label="Open Hannah Chat">
+  <span class="material-symbols-rounded">mode_comment</span>
+  <span class="material-symbols-rounded">close</span>
+</button>
+
+<div id="hannah-popup" class="hannah-popup" aria-live="polite">
+  <div class="hannah-header">
+    <div class="hannah-header-left">
+      <div class="hannah-dot"></div>
+      <div>
+        <div class="hannah-title">Hannah</div>
+        <div class="hannah-subtitle">Secure Tax Assistant</div>
+      </div>
+    </div>
+    <button id="hannah-close" class="material-symbols-rounded" aria-label="Close chat">keyboard_arrow_down</button>
+  </div>
+
+  <div id="hannah-body" class="hannah-body">
+    <div class="hannah-msg bot">
+      <div class="bubble">
+        Hey there 👋<br />
+        I’m Hannah. How can I help you today?
+      </div>
+    </div>
+  </div>
+
+  <div class="hannah-footer">
+    <form id="hannah-form" class="hannah-form">
+      <textarea id="hannah-input" placeholder="Type your message…" rows="1" required></textarea>
+      <button type="submit" id="hannah-send" class="material-symbols-rounded" aria-label="Send">arrow_upward</button>
+    </form>
+  </div>
+</div>
+
+<!-- Emoji picker (optional; remove if you don't want it) -->
+<script src="https://cdn.jsdelivr.net/npm/emoji-mart@latest/dist/browser.js"></script>
+
+<!-- Hannah styles + script -->
+<link rel="stylesheet" href="css/hannah-chat.css" />
+<script src="js/hannah-chat.js"></script>
+
 	</body>
 </html>
