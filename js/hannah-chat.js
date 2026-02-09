@@ -1,16 +1,17 @@
-// Hannah Chatbot – SecureTax (Front-end)
-// Talks to your Cloudflare Worker at /api/hannah
+// Hannah Chatbot – SecureTax (Cloudflare Worker backend)
 
+// UI
 const toggler = document.getElementById("hannah-toggler");
+const popup = document.getElementById("hannah-popup");
 const closeBtn = document.getElementById("hannah-close");
 const form = document.getElementById("hannah-form");
 const input = document.getElementById("hannah-input");
 const body = document.getElementById("hannah-body");
 
-// IMPORTANT: This must match your Worker route
+// IMPORTANT: this must match your Cloudflare Worker route
 const API_URL = "/api/hannah";
 
-// Website context builder
+// Build “website context” so Hannah answers using your page content
 function collectSiteContext() {
   const title = document.title || "Secure Tax";
 
@@ -19,12 +20,18 @@ function collectSiteContext() {
       text: (a.innerText || "").trim(),
       href: a.getAttribute("href") || "",
     }))
-    .filter((x) => x.href)
+    .filter(
+      (x) =>
+        x.href &&
+        (x.href.startsWith("http") ||
+          x.href.startsWith("#") ||
+          x.href.endsWith(".html"))
+    )
     .slice(0, 30);
 
   const mainText = Array.from(document.querySelectorAll("h1,h2,h3,h4,p,li"))
     .map((el) => (el.innerText || "").trim())
-    .filter((t) => t.length > 0 && t.length < 240)
+    .filter((t) => t.length > 0 && t.length < 220)
     .slice(0, 140)
     .join("\n");
 
@@ -49,21 +56,19 @@ ${mainText}
 `.trim();
 }
 
-// Keep short chat history for the server
-const history = []; // {role:"user"|"assistant", content:"..."}
+// Chat history (OpenAI style)
+const history = []; // { role: "user"|"assistant", content: "..." }
 
+// UI helpers
 function addMessage(text, who = "bot") {
   const wrap = document.createElement("div");
   wrap.className = `hannah-msg ${who}`;
-
   const bubble = document.createElement("div");
   bubble.className = "bubble";
   bubble.innerHTML = String(text).replace(/\n/g, "<br/>");
-
   wrap.appendChild(bubble);
   body.appendChild(wrap);
   body.scrollTop = body.scrollHeight;
-
   return bubble;
 }
 
@@ -71,12 +76,12 @@ function setOpen(open) {
   document.body.classList.toggle("hannah-open", open);
 }
 
-toggler?.addEventListener("click", () => {
-  setOpen(!document.body.classList.contains("hannah-open"));
-});
+toggler?.addEventListener("click", () =>
+  setOpen(!document.body.classList.contains("hannah-open"))
+);
 closeBtn?.addEventListener("click", () => setOpen(false));
 
-// Enter to send, shift+enter for newline
+// Enter to send (shift+enter for newline)
 input?.addEventListener("keydown", (e) => {
   if (e.key === "Enter" && !e.shiftKey) {
     e.preventDefault();
@@ -84,45 +89,49 @@ input?.addEventListener("keydown", (e) => {
   }
 });
 
+// Send handler
 form?.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const msg = String(input.value || "").trim();
+  const msg = input.value.trim();
   if (!msg) return;
 
   input.value = "";
-
   addMessage(msg, "user");
   const thinking = addMessage("…", "bot");
 
   try {
-    const payload = {
-      message: msg,
-      context: collectSiteContext(),
-      history: history.slice(-10), // last 10 turns only
-    };
+    const context = collectSiteContext();
 
     const resp = await fetch(API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
+      body: JSON.stringify({
+        message: msg,       // <-- REQUIRED by Worker
+        context: context,   // system prompt / website snippets
+        history: history,   // prior messages
+      }),
     });
 
-    const data = await resp.json().catch(() => ({}));
+    const data = await resp.json();
 
     if (!resp.ok) {
-      const errMsg = data?.error || `Request failed (${resp.status})`;
-      throw new Error(errMsg);
+      throw new Error(data?.error || `Request failed (${resp.status})`);
     }
 
-    const reply = String(data?.reply || "").trim();
-    thinking.innerHTML = reply ? reply.replace(/\n/g, "<br/>") : "Sorry — I couldn’t generate a response.";
+    const answer = String(data?.reply || "").trim();
 
-    // store turns
+    thinking.innerHTML = answer
+      ? answer.replace(/\n/g, "<br/>")
+      : "Sorry — I couldn’t generate a response.";
+
+    // Save history
     history.push({ role: "user", content: msg });
-    history.push({ role: "assistant", content: reply || "" });
+    history.push({ role: "assistant", content: answer || "" });
   } catch (err) {
-    thinking.innerHTML = `Sorry — I ran into an issue: ${String(err.message || err)}`;
+    thinking.innerHTML = `Sorry — I ran into an issue: ${String(
+      err.message || err
+    )}`;
   }
 
   body.scrollTop = body.scrollHeight;
