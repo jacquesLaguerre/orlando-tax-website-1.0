@@ -232,3 +232,54 @@ body.hannah-open #hannah-popup{
     padding: 9px 11px;
   }
 }
+
+/* Assistance hint */
+.hannah-hint {
+  position: absolute;
+  bottom: 70px;
+  right: 0;
+  background: #16b10e;
+  color: #fff;
+  font-size: 13px;
+  padding: 6px 10px;
+  border-radius: 12px;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  animation: pulseHint 1.8s infinite;
+}
+
+/* Hide hint when chat is open */
+body.hannah-open .hannah-hint {
+  display: none;
+}
+
+/* Mobile tweaks */
+@media (max-width: 768px) {
+  .hannah-hint {
+    font-size: 12px;
+    padding: 5px 8px;
+    bottom: 65px;
+  }
+}
+
+@keyframes pulseHint {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.85; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Make toggler a positioning context for the hint */
+#hannah-toggler{
+  position: fixed; /* (or keep whatever you already use) */
+}
+
+/* Default: show open icon, hide close icon */
+#hannah-toggler .open-icon { display: inline-flex; }
+#hannah-toggler .close-icon { display: none; }
+
+/* When chat is open: hide open icon, show close icon */
+body.hannah-open #hannah-toggler .open-icon { display: none; }
+body.hannah-open #hannah-toggler .close-icon { display: inline-flex; }
+
+/* Also hide the hint when open (you asked for this) */
+body.hannah-open #hannah-toggler .hannah-hint { display: none; }
