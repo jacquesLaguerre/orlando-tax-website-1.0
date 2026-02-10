@@ -173,3 +173,62 @@ body.hannah-open #hannah-popup{
   }
   .hannah-body{ height: calc(100% - 120px); }
 }
+
+/* =========================
+   Hannah "Click me" hint
+========================= */
+.hannah-hint{
+  position: fixed;
+  right: 22px;          /* should match your button's right offset */
+  bottom: 92px;         /* sits above the chat icon */
+  z-index: 999999;
+
+  background: #ffffff;
+  color: #222;
+  font-size: 14px;
+  line-height: 1.2;
+  font-weight: 600;
+
+  padding: 10px 12px;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.18);
+  border: 1px solid rgba(0,0,0,.06);
+
+  max-width: 210px;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* little arrow pointing to the button */
+.hannah-hint::after{
+  content: "";
+  position: absolute;
+  right: 18px;
+  bottom: -8px;
+  width: 14px;
+  height: 14px;
+  background: #ffffff;
+  transform: rotate(45deg);
+  border-right: 1px solid rgba(0,0,0,.06);
+  border-bottom: 1px solid rgba(0,0,0,.06);
+}
+
+/* small attention animation */
+@keyframes hannahHintFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+.hannah-hint{
+  animation: hannahHintFloat 2.2s ease-in-out infinite;
+}
+
+/* Mobile: keep it readable + not too wide */
+@media (max-width: 480px){
+  .hannah-hint{
+    right: 14px;
+    bottom: 84px;
+    font-size: 13px;
+    max-width: 175px;
+    padding: 9px 11px;
+  }
+}
