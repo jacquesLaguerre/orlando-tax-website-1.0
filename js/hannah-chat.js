@@ -8,64 +8,61 @@ const form = document.getElementById("hannah-form");
 const input = document.getElementById("hannah-input");
 const body = document.getElementById("hannah-body");
 
-// IMPORTANT: this must match your Cloudflare Worker route
+// IMPORTANT: must match your Cloudflare Worker route
+// If your Worker route is securetax.co/api/hannah* and www.securetax.co/api/hannah*,
+// this relative URL is perfect:
 const API_URL = "/api/hannah";
 
-// Build “website context” so Hannah answers using your page content
+// Chat history (OpenAI style)
+const history = []; // { role: "user"|"assistant", content: "..." }
+
+// Build website context (CONTENT ONLY — no instructions)
 function collectSiteContext() {
   const title = document.title || "Secure Tax";
+  const url = location.href;
 
+  // Get visible-ish page text (best coverage)
+  let text = (document.body?.innerText || "").trim();
+
+  // Clean up and limit size (Workers/OpenAI request size)
+  text = text.replace(/\n{3,}/g, "\n\n");
+  if (text.length > 12000) text = text.slice(0, 12000);
+
+  // Include key links (helpful for contact/refund/W-4 pages)
   const links = Array.from(document.querySelectorAll("a"))
     .map((a) => ({
       text: (a.innerText || "").trim(),
-      href: a.getAttribute("href") || "",
+      href: (a.getAttribute("href") || "").trim(),
     }))
-    .filter(
-      (x) =>
-        x.href &&
-        (x.href.startsWith("http") ||
-          x.href.startsWith("#") ||
-          x.href.endsWith(".html"))
-    )
-    .slice(0, 30);
-
-  const mainText = Array.from(document.querySelectorAll("h1,h2,h3,h4,p,li"))
-    .map((el) => (el.innerText || "").trim())
-    .filter((t) => t.length > 0 && t.length < 220)
-    .slice(0, 140)
-    .join("\n");
-
-  const compactLinks = links
+    .filter((x) => x.href && (x.text || x.href))
+    .slice(0, 60)
     .map((l) => `- ${l.text || l.href}: ${l.href}`)
     .join("\n");
 
   return `
-You are Hannah, the Secure Tax website assistant.
-Only answer using the information in the WEBSITE CONTENT below.
-If the answer isn't on the site, say:
-"I’m not 100% sure from the website. Please contact Secure Tax or use the Contact Us page."
-
-WEBSITE TITLE:
+PAGE TITLE:
 ${title}
 
-WEBSITE LINKS:
-${compactLinks}
+PAGE URL:
+${url}
 
-WEBSITE CONTENT (snippets):
-${mainText}
+PAGE LINKS:
+${links || "(none found)"}
+
+PAGE TEXT:
+${text || "(no page text found)"}
 `.trim();
 }
-
-// Chat history (OpenAI style)
-const history = []; // { role: "user"|"assistant", content: "..." }
 
 // UI helpers
 function addMessage(text, who = "bot") {
   const wrap = document.createElement("div");
   wrap.className = `hannah-msg ${who}`;
+
   const bubble = document.createElement("div");
   bubble.className = "bubble";
   bubble.innerHTML = String(text).replace(/\n/g, "<br/>");
+
   wrap.appendChild(bubble);
   body.appendChild(wrap);
   body.scrollTop = body.scrollHeight;
@@ -107,9 +104,10 @@ form?.addEventListener("submit", async (e) => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        message: msg,       // <-- REQUIRED by Worker
-        context: context,   // system prompt / website snippets
-        history: history,   // prior messages
+        // Worker should accept these:
+        message: msg,
+        context: context,
+        history: history,
       }),
     });
 
