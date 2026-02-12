@@ -2443,3 +2443,445 @@ body .theme-button-one {
   color: #fff;
 }
 
+/* =========================================================
+   Secure Tax — Modern Gradient Theme (White x Green Fade)
+   Paste at VERY BOTTOM of style.css
+   ========================================================= */
+
+/* --- Design tokens --- */
+:root{
+  --brand: #16b10e;                 /* your green */
+  --brand2: #4eea7a;                /* mint highlight */
+  --ink: #0b1220;                   /* modern deep text */
+  --muted: rgba(11,18,32,.65);
+
+  /* soft white->green backgrounds */
+  --bg-1: #ffffff;
+  --bg-2: #f3fff7;
+  --bg-3: #e8fff0;
+
+  /* gradient "flow" */
+  --site-grad: radial-gradient(1100px 700px at 10% 10%, rgba(22,177,14,.12), transparent 55%),
+               radial-gradient(900px 600px at 90% 20%, rgba(78,234,122,.14), transparent 60%),
+               linear-gradient(180deg, #ffffff 0%, #f6fff9 35%, #ecfff3 72%, #ffffff 100%);
+
+  /* buttons */
+  --btn-grad: linear-gradient(135deg, var(--brand) 0%, #29d34b 50%, var(--brand2) 100%);
+
+  /* surfaces */
+  --card: rgba(255,255,255,.82);
+  --border: rgba(11,18,32,.10);
+  --shadow: 0 14px 40px rgba(11,18,32,.08);
+  --shadow2: 0 10px 28px rgba(11,18,32,.10);
+}
+
+/* --- Global background + typography polish --- */
+html, body{
+  height: 100%;
+}
+
+body{
+  color: var(--muted) !important;
+  background: var(--site-grad) !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Give the whole page a subtle "depth" */
+.main-page-wrapper{
+  background: transparent !important;
+}
+
+/* Headings: cleaner + modern */
+h1,h2,h3,h4,h5,h6{
+  color: var(--ink) !important;
+  letter-spacing: -0.02em;
+}
+
+/* Links */
+a{ color: var(--brand); }
+a:hover{ color: #0f8f0b; }
+
+/* --- Modern section rhythm --- */
+.section-margin-top{ margin-top: 90px !important; }
+.section-margin-bottom{ margin-bottom: 90px !important; }
+
+/* --- NAVBAR: glassy, clean, modern --- */
+.theme-header-wrapper{
+  position: sticky; /* feels modern; remove if you must keep absolute */
+  top: 0;
+  z-index: 9999;
+}
+
+/* soft glass background */
+.theme-header-wrapper .menu-wrapper{
+  background: rgba(255,255,255,.75) !important;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(11,18,32,.08);
+  padding: 18px 0 12px 0 !important;
+}
+
+/* when sticky state triggers */
+.menu-wrapper.fixed{
+  background: rgba(255,255,255,.86) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(11,18,32,.10);
+  box-shadow: 0 10px 30px rgba(0,0,0,.06);
+}
+
+/* nav link colors */
+#mega-menu-wrapper .nav > li > a{
+  color: var(--ink) !important;
+  font-weight: 600;
+  letter-spacing: .2px;
+}
+
+/* active underline stays modern green */
+#mega-menu-wrapper .nav > li > a:before{
+  background: var(--brand) !important;
+}
+
+/* hover state */
+#mega-menu-wrapper .nav > li > a:hover{
+  color: var(--brand) !important;
+}
+
+/* Get Quote as modern pill button */
+#mega-menu-wrapper .nav li.quote a{
+  background: rgba(22,177,14,.08) !important;
+  border: 1px solid rgba(22,177,14,.35) !important;
+  color: var(--brand) !important;
+  border-radius: 999px !important;
+  box-shadow: 0 8px 20px rgba(22,177,14,.10);
+}
+
+#mega-menu-wrapper .nav li.quote a:hover{
+  background: var(--btn-grad) !important;
+  color: #fff !important;
+  border-color: transparent !important;
+}
+
+/* Mobile dropdown glass */
+@media (max-width: 991px){
+  #mega-menu-wrapper .navbar-collapse,
+  #mega-menu-wrapper .navbar-collapse.collapse.in{
+    background: rgba(255,255,255,.92) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid rgba(11,18,32,.08);
+    box-shadow: 0 16px 32px rgba(0,0,0,.08);
+    border-radius: 16px;
+    margin-top: 10px;
+    padding: 10px 14px;
+  }
+  #mega-menu-wrapper .navbar-toggle .icon-bar{
+    background: var(--ink) !important;
+  }
+}
+
+/* --- Cards: upgrade every "box" surface --- */
+.card-feature,
+.doc-location-card,
+.client-slider-content .wrapper .text,
+.contact-address,
+.theme-form-style-one,
+.home-faq-item{
+  background: var(--card) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--shadow) !important;
+  border-radius: 18px !important;
+}
+
+/* reduce harsh gray section backgrounds */
+.contact-page,
+.client-section,
+.doc-location-section{
+  background: transparent !important;
+}
+
+/* --- Buttons: gradient + glow --- */
+body .theme-button-one{
+  background: var(--btn-grad) !important;
+  border: 1px solid rgba(22,177,14,.25) !important;
+  color: #fff !important;
+  border-radius: 999px !important;
+  box-shadow: 0 14px 30px rgba(22,177,14,.18);
+  transform: translateZ(0);
+}
+
+body .theme-button-one:hover{
+  filter: brightness(1.02);
+  transform: translateY(-1px);
+  box-shadow: 0 18px 38px rgba(22,177,14,.22);
+}
+
+/* --- Inner banner overlay: switch to green-ish modern overlay --- */
+.theme-inner-banner .opacity{
+  background: linear-gradient(135deg, rgba(22,177,14,.35), rgba(11,18,32,.55)) !important;
+}
+
+/* --- Top Feature: modern hover that matches theme --- */
+.top-feature .single-feature{
+  border-radius: 18px;
+}
+
+.top-feature .single-feature:hover{
+  background: rgba(255,255,255,.88) !important;
+  border: 1px solid rgba(22,177,14,.20) !important;
+  box-shadow: var(--shadow2) !important;
+  transform: translateY(-2px);
+}
+
+/* --- Doc location section: REMOVE the gold, use gradient flow --- */
+.doc-location-section{
+  background: linear-gradient(135deg, rgba(22,177,14,.12), rgba(255,255,255,.85)) !important;
+  border-top: 1px solid rgba(11,18,32,.06);
+  border-bottom: 1px solid rgba(11,18,32,.06);
+}
+
+/* Title styling */
+.doc-location-title{
+  color: var(--ink) !important;
+}
+
+/* Label more premium */
+.doc-location-label{
+  background: rgba(255,255,255,.85) !important;
+  color: var(--ink) !important;
+  border: 1px solid rgba(11,18,32,.10);
+  backdrop-filter: blur(10px);
+}
+
+/* --- Footer: light, clean, blends with gradient --- */
+.theme-footer{
+  background: rgba(255,255,255,.65) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(11,18,32,.08);
+}
+
+.theme-footer .bottom-footer{
+  background: rgba(255,255,255,.80) !important;
+  border-top: 1px solid rgba(11,18,32,.08);
+}
+
+.theme-footer p,
+.theme-footer li,
+.theme-footer a{
+  color: rgba(11,18,32,.75) !important;
+}
+
+.theme-footer h5{
+  color: var(--ink) !important;
+}
+
+/* --- Make forms look premium --- */
+.theme-form-style-one{
+  border-left: 0 !important;
+}
+
+.theme-form-style-one input,
+.theme-form-style-one textarea{
+  background: rgba(255,255,255,.9);
+  border: 1px solid rgba(11,18,32,.12) !important;
+}
+
+.theme-form-style-one input:focus,
+.theme-form-style-one textarea:focus{
+  border-color: rgba(22,177,14,.45) !important;
+  box-shadow: 0 0 0 4px rgba(22,177,14,.12);
+}
+
+/* --- Optional: slightly soften the loader background --- */
+#loader-wrapper{
+  background: #ffffff !important;
+}
+
+/* --- Accessibility: reduce motion if user prefers --- */
+@media (prefers-reduced-motion: reduce){
+  *{ transition: none !important; animation: none !important; }
+}
+
+/* =========================================================
+   Secure Tax — POP PASS (Hero stays white + greener + Doc section yellow/white)
+   Paste at VERY BOTTOM of style.css
+   ========================================================= */
+
+/* 1) Make green POP more (bolder + slightly deeper) */
+:root{
+  --brand: #10c10a;     /* punchier green */
+  --brand2: #67ff8b;    /* brighter mint highlight */
+  --btn-grad: linear-gradient(135deg, #10c10a 0%, #23e344 45%, #67ff8b 100%);
+}
+
+/* Stronger accents across theme */
+.p-color { color: var(--brand) !important; }
+.p-bg-color { background: var(--brand) !important; }
+#mega-menu-wrapper .nav > li > a:hover{ color: var(--brand) !important; }
+
+/* Buttons pop more */
+body .theme-button-one{
+  box-shadow: 0 18px 42px rgba(16,193,10,.28) !important;
+}
+body .theme-button-one:hover{
+  box-shadow: 0 24px 55px rgba(16,193,10,.34) !important;
+}
+
+/* Get Quote button: more bold */
+#mega-menu-wrapper .nav li.quote a{
+  border: 2px solid rgba(16,193,10,.55) !important;
+  background: rgba(16,193,10,.10) !important;
+}
+#mega-menu-wrapper .nav li.quote a:hover{
+  background: var(--btn-grad) !important;
+  color: #fff !important;
+}
+
+/* 2) HERO TEXT MUST STAY WHITE (Inner banner + main banner) */
+.theme-inner-banner h2,
+.theme-inner-banner ul li,
+.theme-inner-banner ul li a{
+  color: #fff !important;
+  text-shadow: 0 10px 28px rgba(0,0,0,.35);
+}
+
+/* If your homepage has slider hero text */
+#theme-main-banner h1,
+#theme-main-banner h3,
+#theme-main-banner h6,
+#theme-main-banner p,
+#theme-main-banner a{
+  color: #fff !important;
+  text-shadow: 0 10px 28px rgba(0,0,0,.40);
+}
+
+/* Make overlay a bit darker so white text stays readable + green stands out */
+#theme-main-banner .camera_overlayer{
+  background: linear-gradient(135deg, rgba(16,193,10,.18), rgba(0,0,0,.58)) !important;
+}
+
+/* Inner banner overlay tuned (white text stays crisp) */
+.theme-inner-banner .opacity{
+  background: linear-gradient(135deg, rgba(16,193,10,.22), rgba(0,0,0,.62)) !important;
+}
+
+/* 3) "Where would you like to send your documents" section = yellowish/whitish gradient */
+.doc-location-section{
+  background:
+    radial-gradient(900px 520px at 18% 10%, rgba(255,214,77,.55), transparent 60%),
+    radial-gradient(900px 520px at 85% 25%, rgba(255,239,190,.70), transparent 62%),
+    linear-gradient(135deg, #fffdf3 0%, #fff5c8 35%, #ffffff 100%) !important;
+  border-top: 1px solid rgba(11,18,32,.06) !important;
+  border-bottom: 1px solid rgba(11,18,32,.06) !important;
+}
+
+/* Title stronger + modern */
+.doc-location-title{
+  color: #0b1220 !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.02em;
+}
+
+/* Cards pop more on yellow background */
+.doc-location-card{
+  background: rgba(255,255,255,.92) !important;
+  border: 1px solid rgba(11,18,32,.10) !important;
+  box-shadow: 0 18px 48px rgba(11,18,32,.14) !important;
+}
+
+/* Map label: premium tag */
+.doc-location-label{
+  background: rgba(255,255,255,.90) !important;
+  border: 1px solid rgba(11,18,32,.12) !important;
+  color: #0b1220 !important;
+  font-weight: 800 !important;
+}
+
+/* Optional: add a soft “green glow” around the doc section buttons if you have them */
+.doc-location-section .theme-button-one{
+  box-shadow: 0 18px 42px rgba(16,193,10,.22) !important;
+}
+
+/* =========================================================
+   Secure Tax – FINAL VISIBILITY FIXES
+   (Paste at VERY BOTTOM of style.css)
+   ========================================================= */
+
+/* ---------------------------
+   1) HERO: remove green tint + keep text white
+----------------------------*/
+
+/* Neutral dark overlay (no green) */
+#theme-main-banner .camera_overlayer{
+  background: linear-gradient(
+    120deg,
+    rgba(0,0,0,0.62) 0%,
+    rgba(0,0,0,0.38) 55%,
+    rgba(0,0,0,0.55) 100%
+  ) !important;
+}
+
+/* Force hero text to stay white */
+#theme-main-banner h1,
+#theme-main-banner h2,
+#theme-main-banner h3,
+#theme-main-banner h4,
+#theme-main-banner h5,
+#theme-main-banner h6,
+#theme-main-banner p,
+#theme-main-banner small,
+#theme-main-banner .camera_caption *{
+  color: #fff !important;
+}
+
+/* If any tint/filter was added elsewhere, kill it */
+#theme-main-banner,
+#theme-main-banner *{
+  filter: none !important;
+}
+
+/* ---------------------------
+   2) "Hiring made simple / Get Hired": make text white
+----------------------------*/
+.consultation-help .text-wrapper h2,
+.consultation-help .text-wrapper h3,
+.consultation-help .text-wrapper p,
+.consultation-help .text-wrapper a,
+.consultation-help .text-wrapper .overlay *{
+  color: #fff !important;
+}
+
+/* Keep the right panel dark so white text pops */
+.consultation-help .text-wrapper .overlay{
+  background: linear-gradient(
+    120deg,
+    rgba(0,0,0,0.78) 0%,
+    rgba(0,0,0,0.62) 60%,
+    rgba(0,0,0,0.78) 100%
+  ) !important;
+}
+
+/* ---------------------------
+   3) "More Testimonials": make writing black/readable
+----------------------------*/
+.client-section h3,
+.client-section h4,
+.client-section h5,
+.client-section p,
+.client-section .client-slider-content .wrapper .name p,
+.client-section .client-slider-content .wrapper .text{
+  color: #111 !important;
+}
+
+/* Ensure testimonial card stays bright */
+.client-slider-content .wrapper .text{
+  background: #fff !important;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+/* If a green overlay/bg is affecting this section, neutralize it */
+.client-section{
+  background: #f6fff8 !important; /* soft mint */
+}
