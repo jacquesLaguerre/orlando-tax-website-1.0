@@ -2885,3 +2885,353 @@ body .theme-button-one:hover{
 .client-section{
   background: #f6fff8 !important; /* soft mint */
 }
+
+/* ==========================================================
+   SECURE TAX – FINAL THEME OVERRIDES (Paste at VERY BOTTOM)
+   - Dims brightness slightly (premium feel)
+   - Removes hover underline/bar that blocks nav
+   - Adds modern hover glow effect
+   - Keeps brand green popping (but less neon)
+   ========================================================== */
+
+/* ---------- 1) Premium Color Tokens ---------- */
+:root{
+  --st-green: #149c0c;          /* softened primary green */
+  --st-green-2: #1dbf17;        /* accent green */
+  --st-green-glow: rgba(29,191,23,.35);
+  --st-ink: #151515;
+  --st-muted: rgba(0,0,0,.62);
+
+  --st-soft-bg: #f6f7f7;
+  --st-card: #ffffff;
+  --st-border: rgba(0,0,0,.08);
+}
+
+/* ---------- 2) Slightly Dim The Whole Site ---------- */
+/* Prefer “real” color tuning instead of heavy filters.
+   This is a LIGHT touch just to reduce harshness. */
+html, body{
+  color: var(--st-muted);
+  background: linear-gradient(180deg, #ffffff 0%, #f4fff6 35%, #ffffff 100%);
+}
+
+/* Softens super-bright sections a bit */
+.main-page-wrapper{
+  background: transparent;
+}
+
+/* ---------- 3) Replace Hard Solid Greens With Premium Gradient ---------- */
+.p-bg-color,
+body .theme-button-one,
+.bottom-banner,
+.feature-banner,
+#theme-main-banner.camera_wrap .camera_pag .camera_pag_ul li.cameracurrent,
+#theme-main-banner.camera_wrap .camera_pag .camera_pag_ul li:hover,
+#mega-menu-wrapper .nav li.quote.bg-color a{
+  background: linear-gradient(135deg, var(--st-green), var(--st-green-2)) !important;
+}
+
+/* Any plain green borders should match */
+body .theme-button-one{
+  border-color: var(--st-green) !important;
+}
+
+/* Green text accents */
+.p-color,
+.theme-counter .single-box .number,
+.contact-page-title h3,
+.theme-footer a:hover,
+#mega-menu-wrapper .nav > li > a:hover,
+#mega-menu-wrapper .nav > li.active > a{
+  color: var(--st-green-2) !important;
+}
+
+/* ---------- 4) Buttons = Modern (Less Neon, More Premium) ---------- */
+body .theme-button-one{
+  border-radius: 14px !important;
+  box-shadow: 0 10px 22px rgba(0,0,0,.10) !important;
+  transition: transform .25s ease, box-shadow .25s ease, filter .25s ease !important;
+}
+
+body .theme-button-one:hover{
+  transform: translateY(-2px) !important;
+  box-shadow: 0 14px 30px rgba(0,0,0,.14) !important;
+  filter: saturate(96%) brightness(98%) !important;
+  background: linear-gradient(135deg, var(--st-green-2), var(--st-green)) !important;
+  color: #fff !important;
+}
+
+/* ---------- 5) NAVBAR: Remove Hover Bar That Blocks Text ---------- */
+/* This is the thing that creates the “bar” behind links on hover */
+#mega-menu-wrapper .nav > li > a:before,
+#mega-menu-wrapper .nav > li > a:after{
+  display: none !important;
+  content: none !important;
+}
+
+/* Keep navbar clean + readable */
+.theme-header-wrapper .menu-wrapper{
+  background: rgba(244,244,244,0.88) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.menu-wrapper.fixed{
+  background: rgba(240,240,240,0.96) !important;
+  box-shadow: 0 10px 26px rgba(0,0,0,.10) !important;
+}
+
+/* Nav link base */
+#mega-menu-wrapper .nav > li > a{
+  color: var(--st-ink) !important;
+  transition: color .25s ease, transform .25s ease, text-shadow .25s ease !important;
+}
+
+/* Nav hover = glow (no bar) */
+#mega-menu-wrapper .nav > li > a:hover{
+  color: var(--st-green-2) !important;
+  text-shadow: 0 0 10px var(--st-green-glow) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Active link (subtle, still premium) */
+#mega-menu-wrapper .nav > li.active > a{
+  text-shadow: 0 0 10px var(--st-green-glow) !important;
+}
+
+/* Mobile toggle icon bars */
+#mega-menu-wrapper .navbar-toggle .icon-bar{
+  background: var(--st-ink) !important;
+}
+
+/* Mobile dropdown background */
+@media (max-width: 991px){
+  #mega-menu-wrapper .navbar-collapse,
+  #mega-menu-wrapper .navbar-collapse.collapse.in{
+    background: rgba(245,245,245,0.96) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(0,0,0,0.06) !important;
+    box-shadow: 0 10px 22px rgba(0,0,0,0.10) !important;
+  }
+}
+
+/* “Get Quote” nav button = modern outline */
+#mega-menu-wrapper .nav li.quote a{
+  background: transparent !important;
+  border: 2px solid var(--st-green-2) !important;
+  color: var(--st-green-2) !important;
+  border-radius: 14px !important;
+  transition: all .25s ease !important;
+}
+
+#mega-menu-wrapper .nav li.quote a:hover{
+  background: rgba(29,191,23,0.10) !important;
+  box-shadow: 0 10px 22px rgba(0,0,0,.10) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* ---------- 6) HERO: keep text WHITE & remove “green tint” ---------- */
+/* Your hero overlay should be neutral dark, not greenish */
+#theme-main-banner .camera_overlayer{
+  background: rgba(0,0,0,0.48) !important;
+}
+
+/* Ensure hero titles stay white */
+#theme-main-banner h1,
+#theme-main-banner h2,
+#theme-main-banner h3,
+#theme-main-banner h6,
+#theme-main-banner p{
+  color: #fff !important;
+  text-shadow: 0 8px 24px rgba(0,0,0,.35) !important;
+}
+
+/* ---------- 7) Hiring panel: Make the text WHITE (like you requested) ---------- */
+/* If your hiring section uses a dark panel, force text white inside it */
+.hiring-panel,
+.hiring-panel *{
+  color: #fff !important;
+}
+
+/* If your “Hiring made simple” is a specific class/section, add it here too */
+.hiring-made-simple,
+.hiring-made-simple *{
+  color: #fff !important;
+}
+
+/* ---------- 8) “More Testimonials” header should be BLACK ---------- */
+.more-testimonials,
+.more-testimonials h1,
+.more-testimonials h2,
+.more-testimonials h3,
+.more-testimonials h4,
+.more-testimonials h5,
+.more-testimonials p{
+  color: #151515 !important;
+}
+
+/* If that section is using your “home-faq-head” style or similar */
+.home-testimonials h2,
+.home-testimonials h3{
+  color: #151515 !important;
+}
+
+/* ---------- 9) Doc Locations Section: Yellowish/Whitish Gradient + Pop ---------- */
+/* target your doc section id */
+#doc-locations,
+.doc-location-section{
+  background: linear-gradient(135deg, #fffce8 0%, #ffffff 45%, #f2fff5 100%) !important;
+  padding: 85px 0 !important;
+}
+
+/* Title darker for contrast */
+#doc-locations .doc-location-title,
+.doc-location-title{
+  color: #151515 !important;
+}
+
+/* Cards more premium */
+.doc-location-card{
+  background: var(--st-card) !important;
+  border: 1px solid var(--st-border) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 14px 38px rgba(0,0,0,.10) !important;
+}
+
+/* Map label cleaner */
+.doc-location-label{
+  background: rgba(0,0,0,.82) !important;
+}
+
+/* ---------- 10) Section backgrounds: reduce harsh contrast ---------- */
+.contact-page{
+  background: #f3f4f4 !important; /* slightly less bright */
+}
+
+.about-company .main-content-wrapper,
+.our-service .single-service .text,
+.our-project .single-project .text,
+.our-blog .single-blog .text,
+.client-section{
+  background: #f6f7f7 !important;
+}
+
+/* Card polish */
+.contact-form-wrapper .contact-address,
+.theme-form-style-one{
+  border-radius: 18px !important;
+  box-shadow: 0 14px 38px rgba(0,0,0,.10) !important;
+  border: 1px solid rgba(0,0,0,.06) !important;
+}
+
+/* Form left border should match new green (not old neon) */
+.theme-form-style-one{
+  border-left-color: var(--st-green) !important;
+}
+
+/* ---------- 11) Footer keeps clean & readable (light) ---------- */
+.theme-footer{
+  background: #f2f2f2 !important;
+}
+
+.theme-footer .bottom-footer{
+  background: #e6e6e6 !important;
+}
+
+.theme-footer p,
+.theme-footer li,
+.theme-footer a{
+  color: #444 !important;
+}
+
+.theme-footer h5{
+  color: #151515 !important;
+}
+
+/* ---------- 12) OPTIONAL: make green pop in a premium way (not neon) ---------- */
+.p-color,
+#mega-menu-wrapper .nav > li > a:hover{
+  filter: saturate(108%) contrast(105%);
+}
+
+/* ==========================================================
+   PATCH: Bring back GLOWY buttons + Force map labels visible
+   Paste at VERY BOTTOM
+   ========================================================== */
+
+/* ---------- A) Restore the glowy button look ---------- */
+body .theme-button-one{
+  background: linear-gradient(135deg, #16b10e, #25d11f) !important;
+  border: 1px solid rgba(22,177,14,.35) !important;
+  color: #fff !important;
+  border-radius: 999px !important;
+  box-shadow:
+    0 10px 24px rgba(0,0,0,.12),
+    0 0 0 6px rgba(22,177,14,.10) !important;
+  transition: transform .25s ease, box-shadow .25s ease, filter .25s ease !important;
+}
+
+body .theme-button-one:hover{
+  transform: translateY(-2px) !important;
+  filter: saturate(110%) brightness(102%) !important;
+  box-shadow:
+    0 16px 34px rgba(0,0,0,.16),
+    0 0 0 10px rgba(22,177,14,.14),
+    0 0 28px rgba(22,177,14,.35) !important;
+  color: #fff !important;
+}
+
+/* Navbar “Get Quote” button glow (keep it premium) */
+#mega-menu-wrapper .nav li.quote a{
+  border-radius: 999px !important;
+  border: 2px solid #16b10e !important;
+  color: #16b10e !important;
+  background: rgba(255,255,255,.55) !important;
+  box-shadow: 0 8px 18px rgba(0,0,0,.10) !important;
+}
+
+#mega-menu-wrapper .nav li.quote a:hover{
+  background: rgba(22,177,14,.10) !important;
+  box-shadow:
+    0 14px 30px rgba(0,0,0,.14),
+    0 0 22px rgba(22,177,14,.25) !important;
+}
+
+/* ---------- B) Fix: Map pill labels not showing (z-index over iframe) ---------- */
+.doc-location-map{
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* iframe behind */
+.doc-location-map iframe{
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 1 !important;
+}
+
+/* label on top, always visible */
+.doc-location-label{
+  position: absolute !important;
+  top: 14px !important;
+  right: 14px !important;
+  left: auto !important;
+  z-index: 999 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+
+  background: rgba(0,0,0,.82) !important;
+  color: #fff !important;
+  font-weight: 800 !important;
+  font-size: 13px !important;
+  padding: 8px 14px !important;
+  border-radius: 999px !important;
+
+  box-shadow: 0 10px 22px rgba(0,0,0,.25) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
