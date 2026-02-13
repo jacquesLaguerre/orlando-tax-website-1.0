@@ -9,26 +9,80 @@ const input = document.getElementById("hannah-input");
 const body = document.getElementById("hannah-body");
 
 // IMPORTANT: must match your Cloudflare Worker route
-// If your Worker route is securetax.co/api/hannah* and www.securetax.co/api/hannah*,
-// this relative URL is perfect:
 const API_URL = "/api/hannah";
 
 // Chat history (OpenAI style)
 const history = []; // { role: "user"|"assistant", content: "..." }
 
+// -----------------------------
+// Helpers: safe HTML + linkify
+// -----------------------------
+function escapeHtml(s) {
+  return String(s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+/**
+ * Makes ONLY these items clickable while keeping display text clean:
+ * - Phone numbers like 407-951-6379 -> <a href="tel:+14079516379">407-951-6379</a>
+ * - Exact Secure Tax addresses -> <a href="maps-search-url">address</a> (address text only)
+ */
+function linkifySecureTax(text) {
+  let out = escapeHtml(text);
+
+  // Phone numbers -> tel:
+  out = out.replace(
+    /\b(\d{3})[-.\s]?(\d{3})[-.\s]?(\d{4})\b/g,
+    (m, a, b, c) => `<a href="tel:+1${a}${b}${c}">${m}</a>`
+  );
+
+  // Exact addresses -> Google Maps search link (but display stays address only)
+  const addresses = [
+    "111 Sermon Blvd, Fern Park, FL 32730 United States",
+    "4418 S Orange Blossom Trl, Orlando, FL 32839 United States",
+  ];
+
+  for (const addr of addresses) {
+    const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+      addr
+    )}`;
+    const re = new RegExp(addr.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "g");
+    out = out.replace(
+      re,
+      `<a href="${url}" target="_blank" rel="noopener noreferrer">${addr}</a>`
+    );
+  }
+
+  // Newlines -> <br/>
+  out = out.replace(/\n/g, "<br/>");
+  return out;
+}
+
+// ---------------------------------------------------
 // Build website context (CONTENT ONLY — no instructions)
+// IMPORTANT: includes key sections even if page is long
+// ---------------------------------------------------
 function collectSiteContext() {
   const title = document.title || "Secure Tax";
   const url = location.href;
 
-  // Get visible-ish page text (best coverage)
+  // Baseline visible text
   let text = (document.body?.innerText || "").trim();
-
-  // Clean up and limit size (Workers/OpenAI request size)
   text = text.replace(/\n{3,}/g, "\n\n");
-  if (text.length > 12000) text = text.slice(0, 12000);
 
-  // Include key links (helpful for contact/refund/W-4 pages)
+  // High-priority sections that must be included for answers
+  const cashSection =
+    document.querySelector(".cash-advance-section")?.innerText?.trim() || "";
+  const locationsSection =
+    document.querySelector("#doc-locations")?.innerText?.trim() || "";
+  const topFeature =
+    document.querySelector(".top-feature")?.innerText?.trim() || "";
+
+  // Links (kept, useful)
   const links = Array.from(document.querySelectorAll("a"))
     .map((a) => ({
       text: (a.innerText || "").trim(),
@@ -39,12 +93,23 @@ function collectSiteContext() {
     .map((l) => `- ${l.text || l.href}: ${l.href}`)
     .join("\n");
 
-  return `
+  // Combine with priority sections first
+  let combined = `
 PAGE TITLE:
 ${title}
 
 PAGE URL:
 ${url}
+
+IMPORTANT SECTIONS:
+CASH ADVANCE SECTION:
+${cashSection || "(not found)"}
+
+LOCATIONS SECTION:
+${locationsSection || "(not found)"}
+
+CALL US / WALK IN SECTION:
+${topFeature || "(not found)"}
 
 PAGE LINKS:
 ${links || "(none found)"}
@@ -52,6 +117,11 @@ ${links || "(none found)"}
 PAGE TEXT:
 ${text || "(no page text found)"}
 `.trim();
+
+  // Limit size safely
+  if (combined.length > 12000) combined = combined.slice(0, 12000);
+
+  return combined;
 }
 
 // UI helpers
@@ -61,7 +131,9 @@ function addMessage(text, who = "bot") {
 
   const bubble = document.createElement("div");
   bubble.className = "bubble";
-  bubble.innerHTML = String(text).replace(/\n/g, "<br/>");
+
+  // ✅ Render clickable phones/addresses without showing extra link text
+  bubble.innerHTML = linkifySecureTax(text);
 
   wrap.appendChild(bubble);
   body.appendChild(wrap);
@@ -104,10 +176,13 @@ form?.addEventListener("submit", async (e) => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        // Worker should accept these:
+        // ✅ Worker reads this
         message: msg,
         context: context,
-        history: history,
+
+        // ✅ IMPORTANT: send conversation as `messages` (not `history`)
+        // so the Worker can actually use it if you ever switch to messages-based logic
+        messages: history,
       }),
     });
 
@@ -119,16 +194,17 @@ form?.addEventListener("submit", async (e) => {
 
     const answer = String(data?.reply || "").trim();
 
+    // ✅ Render clickable phones/addresses without showing tel/maps text
     thinking.innerHTML = answer
-      ? answer.replace(/\n/g, "<br/>")
+      ? linkifySecureTax(answer)
       : "Sorry — I couldn’t generate a response.";
 
-    // Save history
+    // Save history (OpenAI chat format)
     history.push({ role: "user", content: msg });
     history.push({ role: "assistant", content: answer || "" });
   } catch (err) {
-    thinking.innerHTML = `Sorry — I ran into an issue: ${String(
-      err.message || err
+    thinking.innerHTML = `Sorry — I ran into an issue: ${escapeHtml(
+      String(err.message || err)
     )}`;
   }
 
